@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires,@typescript-eslint/no-non-null-assertion */
 /**
  * modified from https://github.com/vuejs/core/blob/master/scripts/release.js
  */
@@ -10,13 +9,14 @@ import path from 'path';
 import prompts from 'prompts';
 import type { ReleaseType } from 'semver';
 import * as semver from 'semver';
+import minimist from 'minimist';
 
-const args = require('minimist')(process.argv.slice(2));
+const args = minimist(process.argv.slice(2));
 
 const pkgDir = process.cwd();
 const pkgPath = path.resolve(pkgDir, 'package.json');
 
-// eslint-disable-next-line import/no-dynamic-require
+// eslint-disable-next-line import/no-dynamic-require,@typescript-eslint/no-require-imports
 const pkg: { name: string; version: string } = require(pkgPath);
 const pkgName = pkg.name.replace(/^@tencent\//, '').replace('tds-vue-plugin-', '');
 const currentVersion = pkg.version;
