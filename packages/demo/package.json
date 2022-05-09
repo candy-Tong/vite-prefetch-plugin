@@ -32,7 +32,6 @@
     "dist",
     "types"
   ],
-  "type": "module",
   "typings": "typings/index.d.ts",
   "repository": {
     "type": "git",
