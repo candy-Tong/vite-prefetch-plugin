@@ -19,7 +19,7 @@ jobs:
           npm i pnpm --ignore-scripts --registry https://mirrors.tencent.com/npm/ --legacy-peer-deps
           export PATH=node_modules/.bin:$PATH+
           pnpm config set registry https://mirrors.tencent.com/npm/
-          pnpm install --frozen-lockfile
+          pnpm install
       - name: 执行lint
         run: |
           npm run lint:fix
