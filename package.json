@@ -4,8 +4,8 @@
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint --ext .vue,.js,.jsx,.ts,.tsx ./ --max-warnings 0",
     "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --fix",
-    "stylelint": "stylelint **/*.{html,vue,sass,less}",
-    "stylelint:fix": "stylelint --fix **/*.{html,vue,vss,sass,less}",
+    "stylelint": "stylelint **/*.{html,vue,sass,less} --allow-empty-input",
+    "stylelint:fix": "stylelint --fix **/*.{html,vue,vss,sass,less} --allow-empty-input",
     "prepare": "husky install"
   },
   "dependencies": {},
