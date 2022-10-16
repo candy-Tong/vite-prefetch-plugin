@@ -25,7 +25,7 @@ const { skipBuild } = args;
 
 const versionIncrements: ReleaseType[] = ['patch', 'minor', 'major', 'prepatch', 'preminor', 'premajor', 'prerelease'];
 
-const inc: (i: ReleaseType) => string = (i) => semver.inc(currentVersion, i, 'beta')!;
+const inc: (i: ReleaseType) => string = i => semver.inc(currentVersion, i, 'beta')!;
 
 type RunFn = (bin: string, args: string[], opts?: ExecaOptions<string>) => ExecaChildProcess<string>;
 
@@ -37,7 +37,7 @@ const dryRun: DryRunFn = (bin, args, opts: any) => console.log(colors.blue(`[dry
 
 const runIfNotDry = isDryRun ? dryRun : run;
 
-const step: (msg: string) => void = (msg) => console.log(colors.cyan(msg));
+const step: (msg: string) => void = msg => console.log(colors.cyan(msg));
 
 function updateVersion(version: string): void {
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
@@ -48,7 +48,7 @@ function updateVersion(version: string): void {
 async function publishPackage(version: string, runIfNotDry: RunFn | DryRunFn): Promise<void> {
   const publicArgs = ['publish', '--no-git-tag-version', '--new-version', version, '--access', 'public'];
   if (args.tag) {
-    publicArgs.push(`--tag`, args.tag);
+    publicArgs.push('--tag', args.tag);
   }
   try {
     // important: we still use Yarn 1 to publish since we rely on its specific
@@ -78,9 +78,9 @@ async function main(): Promise<void> {
       name: 'release',
       message: 'Select release type',
       choices: versionIncrements
-        .map((i) => `${i} (${inc(i)})`)
+        .map(i => `${i} (${inc(i)})`)
         .concat(['custom'])
-        .map((i) => ({ value: i, title: i })),
+        .map(i => ({ value: i, title: i })),
     });
 
     if (release === 'custom') {
@@ -110,7 +110,7 @@ async function main(): Promise<void> {
     const { tagBeta }: { tagBeta: boolean } = await prompts({
       type: 'confirm',
       name: 'tagBeta',
-      message: `Publish under dist-tag "beta"?`,
+      message: 'Publish under dist-tag "beta"?',
     });
 
     if (tagBeta) args.tag = 'beta';
@@ -136,7 +136,7 @@ async function main(): Promise<void> {
   if (!skipBuild && !isDryRun) {
     await run('pnpm', ['run', 'build']);
   } else {
-    console.log(`(skipped)`);
+    console.log('(skipped)');
   }
 
   // pnpm run changelog
@@ -166,7 +166,7 @@ async function main(): Promise<void> {
   await runIfNotDry('git', ['push']);
 
   if (isDryRun) {
-    console.log(`\nDry run finished - run git diff to see package changes.`);
+    console.log('\nDry run finished - run git diff to see package changes.');
   }
 
   console.log();

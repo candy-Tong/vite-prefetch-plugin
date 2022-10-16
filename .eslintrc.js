@@ -3,7 +3,6 @@ module.exports = {
   extends: [
     '@tencent/eslint-config-tencent',
     '@tencent/eslint-config-tencent/ts',
-    '@tencent/eslint-config-tencent/prettier',
     'plugin:vue/vue3-recommended',
   ],
   parser: 'vue-eslint-parser',
