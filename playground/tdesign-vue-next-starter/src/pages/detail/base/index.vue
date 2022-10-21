@@ -1,3 +1,4 @@
+<script src="../../../main.ts"></script>
 <template>
   <div class="detail-base">
     <t-card title="基本信息">

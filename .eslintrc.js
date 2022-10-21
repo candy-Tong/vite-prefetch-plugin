@@ -20,6 +20,7 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/naming-convention': ['off'],
+    'no-plusplus': ['off'],
     '@typescript-eslint/consistent-type-assertions': [
       'error',
       {

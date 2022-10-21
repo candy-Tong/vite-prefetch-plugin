@@ -3,7 +3,8 @@
   "version": "0.5.2",
   "scripts": {
     "dev:mock": "vite --mode mock",
-    "dev": "vite--mode development",
+    "dev": "vite --force",
+    "debug": "cross-env DEBUG=vite:deps vite --force",
     "dev:linux": "vite --mode development",
     "build:test": "vite build --mode test",
     "build": "vue-tsc --noEmit && vite build --mode release",
@@ -34,6 +35,7 @@
     "vue-router": "~4.0.11"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@types/echarts": "^4.9.10",
@@ -61,8 +63,9 @@
     "stylelint-less": "1.0.1",
     "stylelint-order": "~4.1.0",
     "typescript": "~4.8.4",
-    "vite": "^2.7.1",
+    "vite": "^3.1.8",
     "vite-plugin-mock": "^2.9.6",
+    "vite-prefetch-plugin": "workspace:*",
     "vite-svg-loader": "^3.1.0",
     "vue-tsc": "^0.34.11"
   }

@@ -5,6 +5,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import svgLoader from 'vite-svg-loader';
 
 import path from 'path';
+import {includes} from "lodash";
 
 const CWD = process.cwd();
 
@@ -17,13 +18,14 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
+      conditions: mode === 'development' ? ['dev'] : undefined,
     },
 
     css: {
       preprocessorOptions: {
         less: {
           modifyVars: {
-            hack: `true; @import (reference) "${path.resolve('src/style/variables.less')}";`,
+            hack: `true; @import (reference) "${path.resolve(__dirname,'src/style/variables.less')}";`,
           },
           math: 'strict',
           javascriptEnabled: true,
@@ -48,5 +50,14 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         '/api': 'http://127.0.0.1:3000/',
       },
     },
+    optimizeDeps: {
+      entries: [
+        '**/*.html',
+        './src/router/modules/**/*.ts',
+        // './src/router/modules/base.ts',
+        // './src/router/modules/components.ts',
+        // './src/router/modules/other.ts',
+      ]
+    }
   };
 };
